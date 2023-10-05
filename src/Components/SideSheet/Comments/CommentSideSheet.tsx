@@ -126,6 +126,12 @@ const CommentSideSheet: FC<Props> = ({
     }, [conversations])
 
     useEffect(() => {
+        mapTabToConversations(activeTab)?.map((conversation: DisplayConversation) => (
+            console.log(conversation)
+        ))
+    }, [activeTab])
+
+    useEffect(() => {
         (async () => {
             try {
                 if (!activeTagData?.review || !activeTagData?.review.id) { return }

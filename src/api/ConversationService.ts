@@ -9,38 +9,66 @@ class ConversationService extends BaseService {
     }
 
     async getMessagesForConversation(reviewId: string, conversationId: string) {
-        const result: any = await this.get(`${reviewId}/conversations/${conversationId}`)
+        const result: any = await this.get(
+            `${reviewId}/conversations/${conversationId}`,
+        )
         return result
     }
 
     async getConversationsForTagReview(reviewId: string) {
-        const result: any = await this.get(`${reviewId}/conversations`)
+        const result: any = await this.get(
+            `${reviewId}/conversations?includeLatestMessage=true`,
+        )
         return result
     }
 
-    async addMessage(reviewId: string, conversationId: string, message: Message) {
-        const result: any = await this.post(`${reviewId}/conversations/${conversationId}/messages`, {
-            body: message,
-        })
+    async addMessage(
+        reviewId: string,
+        conversationId: string,
+        message: Message,
+    ) {
+        const result: any = await this.post(
+            `${reviewId}/conversations/${conversationId}/messages`,
+            {
+                body: message,
+            },
+        )
         return result
     }
 
-    async createConversation(reviewId: string, message: Components.Schemas.ConversationDto) {
+    async createConversation(
+        reviewId: string,
+        message: Components.Schemas.ConversationDto,
+    ) {
         const result: any = await this.post(`${reviewId}/conversations`, {
             body: message,
         })
         return result
     }
 
-    async deleteMessage(reviewId: string, conversationId: string, commentId: string) {
-        const result: any = await this.delete(`${reviewId}/conversations/${conversationId}/messages/${commentId}`)
+    async deleteMessage(
+        reviewId: string,
+        conversationId: string,
+        commentId: string,
+    ) {
+        const result: any = await this.delete(
+            `${reviewId}/conversations/${conversationId}/messages/${commentId}`,
+        )
         return result.status
     }
 
-    async updateMessage(reviewId: string, conversationId: string, commentId: string, message: Message) {
-        const result: any = await this.put(`${reviewId}/conversations/${conversationId}/messages/${commentId}`, {
-            body: message,
-        })
+    async updateMessage(
+        reviewId: string,
+        conversationId: string,
+        commentId: string,
+        message: Message,
+    ) {
+        const result: any = await this.put(
+            `${reviewId}/conversations/${conversationId}/messages/${commentId}`,
+            {
+                body: message,
+            },
+        )
         return result
     }
 }
